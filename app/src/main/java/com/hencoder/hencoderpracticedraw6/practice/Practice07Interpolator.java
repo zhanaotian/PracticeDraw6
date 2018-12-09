@@ -32,72 +32,72 @@ import com.hencoder.hencoderpracticedraw6.Utils;
  * 它的关键是理解，所以还是去看几眼实际效果吧。
  */
 public class Practice07Interpolator extends LinearLayout {
-    Spinner spinner;
-    Button animateBt;
-    ImageView imageView;
+  Spinner spinner;
+  Button animateBt;
+  ImageView imageView;
 
-    Interpolator[] interpolators = new Interpolator[13];
-    Path interpolatorPath;
+  Interpolator[] interpolators = new Interpolator[13];
+  Path interpolatorPath;
 
-    public Practice07Interpolator(Context context) {
-        super(context);
-    }
+  public Practice07Interpolator(Context context) {
+    super(context);
+  }
 
-    public Practice07Interpolator(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
+  public Practice07Interpolator(Context context, @Nullable AttributeSet attrs) {
+    super(context, attrs);
+  }
 
-    public Practice07Interpolator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
+  public Practice07Interpolator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+  }
 
-    {
-        interpolatorPath = new Path();
-        interpolatorPath.lineTo(0.25f, 0.25f);
-        interpolatorPath.moveTo(0.25f, 1.5f);
-        interpolatorPath.lineTo(1, 1);
-        interpolators[0] = new AccelerateDecelerateInterpolator();
-        interpolators[1] = new LinearInterpolator();
-        interpolators[2] = new AccelerateInterpolator();
-        interpolators[3] = new DecelerateInterpolator();
-        interpolators[4] = new AnticipateInterpolator();
-        interpolators[5] = new OvershootInterpolator();
-        interpolators[6] = new AnticipateOvershootInterpolator();
-        interpolators[7] = new BounceInterpolator();
-        interpolators[8] = new CycleInterpolator(0.5f);
-        interpolators[9] = PathInterpolatorCompat.create(interpolatorPath);
-        interpolators[10] = new FastOutLinearInInterpolator();
-        interpolators[11] = new FastOutSlowInInterpolator();
-        interpolators[12] = new LinearOutSlowInInterpolator();
-    }
+  {
+    interpolatorPath = new Path();
+    interpolatorPath.lineTo(0.25f, 0.25f);
+    interpolatorPath.moveTo(0.25f, 1.5f);
+    interpolatorPath.lineTo(1, 1);
+    interpolators[0] = new AccelerateDecelerateInterpolator();
+    interpolators[1] = new LinearInterpolator();
+    interpolators[2] = new AccelerateInterpolator();
+    interpolators[3] = new DecelerateInterpolator();
+    interpolators[4] = new AnticipateInterpolator();
+    interpolators[5] = new OvershootInterpolator();
+    interpolators[6] = new AnticipateOvershootInterpolator();
+    interpolators[7] = new BounceInterpolator();
+    interpolators[8] = new CycleInterpolator(0.5f);
+    interpolators[9] = PathInterpolatorCompat.create(interpolatorPath);
+    interpolators[10] = new FastOutLinearInInterpolator();
+    interpolators[11] = new FastOutSlowInInterpolator();
+    interpolators[12] = new LinearOutSlowInInterpolator();
+  }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
+  @Override
+  protected void onAttachedToWindow() {
+    super.onAttachedToWindow();
 
-        spinner = (Spinner) findViewById(R.id.interpolatorSpinner);
+    spinner = (Spinner) findViewById(R.id.interpolatorSpinner);
 
-        animateBt = (Button) findViewById(R.id.animateBt);
-        imageView = (ImageView) findViewById(R.id.imageView);
-        animateBt.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView.animate()
-                        .translationX(Utils.dpToPixel(150))
-                        .setDuration(600)
-                        .setInterpolator(interpolators[spinner.getSelectedItemPosition()])
-                        .withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                imageView.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        imageView.setTranslationX(0);
-                                    }
-                                }, 500);
-                            }
-                        });
-            }
-        });
-    }
+    animateBt = (Button) findViewById(R.id.animateBt);
+    imageView = (ImageView) findViewById(R.id.imageView);
+    animateBt.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        imageView.animate()
+            .translationX(Utils.dpToPixel(150))
+            .setDuration(600)
+            .setInterpolator(interpolators[spinner.getSelectedItemPosition()])
+            .withEndAction(new Runnable() {
+              @Override
+              public void run() {
+                imageView.postDelayed(new Runnable() {
+                  @Override
+                  public void run() {
+                    imageView.setTranslationX(0);
+                  }
+                }, 500);
+              }
+            });
+      }
+    });
+  }
 }
